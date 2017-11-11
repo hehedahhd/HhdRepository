@@ -129,7 +129,7 @@ $ui.render({
   ]
 })
 
-var ver = "1.5"
+var ver = "1.6"
 
 if (typeof($cache.get("originalIndex")) == "undefined") {
   var indexType = 0
@@ -155,10 +155,18 @@ $http.get({
     $cache.set("data", resp.data)
     load()
     var UpdateInfo = resp.data[0]
-    if (resp.data[0].TheNewestVersion == ver) {} else {
+    if (UpdateInfo.TheNewestVersion == ver) {
+      if (UpdateInfo.Board[0] == $cache.get("Board")) {} else if (UpdateInfo.Board[0] == 0) {} else {
+        $ui.alert({
+          title: "通知",
+          message: UpdateInfo.Board[1]
+        })
+        $cache.set("Board", UpdateInfo.Board[0])
+      }
+    } else {
       $ui.alert({
         title: "发现新版本-V" + UpdateInfo.TheNewestVersion,
-        message: "更新说明:\n" + UpdateInfo.UpdateComment,
+        message: UpdateInfo.UpdateComment,
         actions: [{
             title: "取消"
           },
