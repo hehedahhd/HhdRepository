@@ -1,11 +1,10 @@
 /*
- *By:Hhdº
+ * By:Hhdº
  */
 
 $ui.render({
   views: [{
       type: "menu",
-      items: ["加载中……"],
       layout: function(make) {
         make.left.top.right.equalTo(0)
         make.height.equalTo(44)
@@ -30,7 +29,7 @@ $ui.render({
                   img: {
                     src: data.image[i]
                   },
-                  label: {
+                  Name: {
                     text: names[i]
                   },
                   note: {
@@ -53,16 +52,7 @@ $ui.render({
     {
       type: "list",
       props: {
-        rowHeight: 64.0,
-        separatorInset: $insets(0, 5, 0, 0),
-        data: [{
-          label: {
-            text: "加载中，请稍后……"
-          },
-          img: {
-            src: "https://i.loli.net/2017/11/11/5a063c1585414.jpg"
-          }
-        }],
+        rowHeight: 80,
         template: [{
             type: "image",
             props: {
@@ -70,46 +60,61 @@ $ui.render({
               radius: 7
             },
             layout: function(make, view) {
-              make.left.top.bottom.inset(5)
+              make.left.top.bottom.inset(10)
               make.width.equalTo(view.height)
             }
           },
           {
             type: "label",
             props: {
-              id: "label",
-              font: $font("bold", 16),
+              id: "Name",
+              font: $font("bold", 17),
               lines: 1
             },
             layout: function(make, view) {
               make.left.equalTo($("img").right).offset(10)
-              make.top.equalTo(10)
-              make.right.inset(10)
-              make.height.equalTo(20)
+              make.top.inset(13)
+            }
+          },
+          {
+            type: "label",
+            props: {
+              font: $font("bold", 20),
+              text: ">",
+              textColor: $color("gray")
+            },
+            layout: function(make, view) {
+              make.centerY.equalTo(view.super)
+              make.right.inset(15)
             }
           },
           {
             type: "label",
             props: {
               id: "note",
-              font: $font(12),
+              font: $font(13),
               lines: 1,
-              radius: 2,
               textColor: $color("gray")
             },
             layout: function(make) {
-              make.left.equalTo($("label"))
-              make.top.equalTo($("label").bottom).offset(5)
-              make.bottom.equalTo(-10)
+              make.left.equalTo($("Name"))
+              make.bottom.inset(10)
+              make.top.inset(30)
+              make.right.inset(40)
             }
           },
         ],
-        actions: [{
-          title: "分享此规则",
-          handler: function(sender, indexPath) {
-            $share.sheet("https://workflow.is/" + sender.data[indexPath.row].url)
+        footer: {
+          type: "label",
+          props: {
+            id: "LoadingLabel",
+            height: 20,
+            text: "加载中……",
+            textColor: $color("#AAAAAA"),
+            align: $align.center,
+            font: $font(12)
           }
-        }]
+        }
       },
       layout: function(make) {
         make.top.equalTo($("menu").bottom)
@@ -117,14 +122,14 @@ $ui.render({
       },
       events: {
         didSelect: function(sender, indexPath, data) {
-          $app.openURL("workflow://" + data.url)
+          detailsView(data)
         }
       }
     }
   ]
 })
 
-var ver = "1.1"
+var ver = "1.5"
 
 if (typeof($cache.get("originalIndex")) == "undefined") {
   var indexType = 0
@@ -133,6 +138,8 @@ if (typeof($cache.get("originalIndex")) == "undefined") {
 } else {
   var indexType = $cache.get("originalIndex")
 }
+
+var shareContent = "[Title]\nBy:Hhdº\nComment"
 
 var text = "{\"reqName\":\"反馈\",\"reqEmail\":\"\",\"prop0\":\"zdy1\",\"reqContent\":\"zdy2\",\"memberId\":0}"
 
@@ -158,7 +165,7 @@ $http.get({
           {
             title: "更新",
             handler: function() {
-              $app.openURL("pin://install?url=" + UpdateInfo.JSURL)
+              $app.openBrowser({ url: UpdateInfo.JSURL })
             }
           }
         ]
@@ -166,6 +173,80 @@ $http.get({
     }
   }
 })
+
+function detailsView(scriptInfo) {
+  $ui.push({
+    props: {
+      title: scriptInfo.Name.text
+    },
+    views: [{
+        type: "image",
+        props: {
+          id: "BigImage",
+          src: scriptInfo.img.src,
+          bgcolor: $color("white")
+        },
+        layout: function(make, view) {
+          make.top.inset(20)
+          make.centerX.equalTo(view.super)
+          make.size.equalTo($size(110, 110))
+        }
+      },
+      {
+        type: "button",
+        props: {
+          title: "分享此作品",
+          id: "Share",
+          bgcolor: $color("gray")
+        },
+        layout: function(make) {
+          make.bottom.inset(30)
+          make.left.inset(30)
+          make.size.equalTo($size(120, 40))
+        },
+        events: {
+          tapped: function(sender) {
+            var scriptURL = "https://workflow.is/" + scriptInfo.url
+            var sc = shareContent.replace(/Title/g, scriptInfo.Name.text).replace(/Comment/g, scriptInfo.note.text)
+            $share.sheet([sc, scriptURL])
+          }
+        }
+      },
+      {
+        type: "button",
+        props: {
+          title: "安装至应用",
+          id: "Install",
+          bgcolor: $color("gray")
+        },
+        layout: function(make) {
+          make.bottom.inset(30)
+          make.right.inset(30)
+          make.size.equalTo($size(120, 40))
+        },
+        events: {
+          tapped: function(sender) {
+            $app.openBrowser({ url: "workflow://" + scriptInfo.url })
+          }
+        }
+      },
+      {
+        type: "text",
+        props: {
+          bgcolor: $color("#EDEDED"),
+          text: scriptInfo.note.text,
+          radius: 7,
+          font: $font("AppleColorEmoji", 17)
+        },
+        layout: function(make) {
+          make.top.equalTo($("BigImage").bottom).offset(20)
+          make.left.right.inset(30)
+          make.bottom.equalTo($("Share").top).offset(-20)
+        }
+      },
+    ]
+  })
+}
 
 function load() {
   var arr = []
@@ -176,7 +257,7 @@ function load() {
       img: {
         src: data.image[i]
       },
-      label: {
+      Name: {
         text: names[i]
       },
       note: {
@@ -186,6 +267,7 @@ function load() {
     })
   }
   $("list").data = arr
+  $("list").footer.text = ""
 }
 
 function fk() {
@@ -262,6 +344,7 @@ function fk() {
               header: {
                 "Content-Type": "application/x-www-form-urlencoded"
               },
+              timeout: 20,
               body: {
                 moduleId: 7,
                 validateCode: null,
@@ -274,6 +357,8 @@ function fk() {
                 if (resp.data.success == true) {
                   $ui.alert("反馈成功，请等待回复")
                   $ui.pop()
+                } else if (resp.data == "") {
+                  $ui.alert("请求超时，请稍后再试")
                 } else {
                   $ui.alert("反馈失败，请稍后再试")
                 }
