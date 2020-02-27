@@ -155,21 +155,74 @@ if (isSurge) {
 }
 // #endregion
 const nCoVdata = encodeURI("https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=" + area)
-$httpClient.get(nCoVdata, function(error, response, data){
+$httpClient.get({
+  url:"https://mars.sharedaka.com/api/v1/habit/note/create",
+  headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2h2cTBCdE1penctX0EycXkwVnI1WFkyRnhvIiwiYXVkaWVuY2UiOiJtb2JpbGUiLCJjcmVhdGVkIjoxNTgyODE3MDU4NTg3LCJhcHBJZCI6Ind4ODU1YzVkNzcxOGYyMThjOSIsImN1cnJlbnRPcGVuSWQiOiJvY2h2cTBCdE1penctX0EycXkwVnI1WFkyRnhvIiwib3JpZ2luT3BlbklkIjoib2NodnEwQnRNaXp3LV9BMnF5MFZyNVhZMkZ4byIsImV4cCI6MTU4MjkwMzQ1OH0.haUP45wjvt9EXRQYWtCT-IdPdQXBHkM9LKEFan2vVJ4"
+        },
+        body:`habitID=4025457
+&
+notePhotoProperties=
+&
+tagIds=
+&
+openId=ochvq0BtMizw-_A2qy0Vr5XY2Fxo
+&
+topicID=0
+&
+curDate=
+&
+logID=711246615
+&
+noteText=jjjjj
+&
+notePhoto=
+&
+noteLat=
+&
+noteLng=
+&
+noteLocation=
+&
+noteLocationDesc=
+&
+noteVisible=1
+&
+habitForceNoteState=1
+&
+noteAudioKey=
+&
+noteAudioType=1
+&
+noteAudioTime=0
+&
+noteVideoKey=
+&
+noteVideoDuration=
+&
+noteVideoHeight=
+&
+noteVideoWidth=
+&
+noteVideoSize=
+&
+qrCode=
+&
+fromOpenId=
+&
+inviteType=
+&
+sessionId=1582817077972
+`
+}, function(error, response, data){
     if (error){
         console.log(error);
         $done();                   
     } else {
         var obj = JSON.parse(data);
         console.log(obj);
-        var province = "所在省份:" + obj.results[0].provinceName;
-        var province_status = "现存确诊: " + obj.results[0].currentConfirmedCount + "  累计确诊: " + obj.results[0].confirmedCount + "  治愈: " + obj.results[0].curedCount + "  死亡: " + obj.results[0].deadCount + "\n";
-        var cities_status = "";
-        for (var i = 0; i < obj.results[0].cities.length; i++) {
-        var cities_status = cities_status + "地级市: " + obj.results[0].cities[i].cityName + "  现存确诊: " + obj.results[0].cities[i].currentConfirmedCount + "  累计确诊: " + obj.results[0].cities[i].confirmedCount + "  治愈: " + obj.results[0].cities[i].curedCount + "  死亡: " + obj.results[0].cities[i].deadCount + "\n";}
-        let nCoV = [province,province_status,cities_status];
-        $notification.post(nCoV[0], nCoV[1],nCoV[2]);
-        $done();
+        $notification.post(obj);
     }
 }
 );
