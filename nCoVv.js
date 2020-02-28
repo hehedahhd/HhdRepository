@@ -155,7 +155,7 @@ if (isSurge) {
 }
 // #endregion
 const nCoVdata = encodeURI("https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=" + area)
-$httpClient.get({
+$httpClient.post({
   url:"https://mars.sharedaka.com/api/v1/habit/note/create",
   headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -222,7 +222,7 @@ sessionId=1582817077972
     } else {
         var obj = JSON.parse(data);
         console.log(obj);
-        $notification.post(obj);
+        $notification.post(obj.msg);
     }
 }
 );
