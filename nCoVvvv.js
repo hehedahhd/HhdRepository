@@ -161,7 +161,7 @@ $httpClient.post({
           "Content-Type": "application/x-www-form-urlencoded",
           Token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2h2cTBCdE1penctX0EycXkwVnI1WFkyRnhvIiwiYXVkaWVuY2UiOiJtb2JpbGUiLCJjcmVhdGVkIjoxNTgyODE3MDU4NTg3LCJhcHBJZCI6Ind4ODU1YzVkNzcxOGYyMThjOSIsImN1cnJlbnRPcGVuSWQiOiJvY2h2cTBCdE1penctX0EycXkwVnI1WFkyRnhvIiwib3JpZ2luT3BlbklkIjoib2NodnEwQnRNaXp3LV9BMnF5MFZyNVhZMkZ4byIsImV4cCI6MTU4MjkwMzQ1OH0.haUP45wjvt9EXRQYWtCT-IdPdQXBHkM9LKEFan2vVJ4"
         },
-        body:`habitID=4025457
+        body:{habitID=4025457
 &
 notePhotoProperties=
 &
@@ -214,7 +214,7 @@ fromOpenId=
 inviteType=
 &
 sessionId=1582817077972
-`
+             }
 }, function(error, response, data){
     if (error){
         console.log(error);
