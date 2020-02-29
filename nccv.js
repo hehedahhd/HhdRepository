@@ -161,7 +161,7 @@ $httpClient.post({
           "Content-Type": "application/x-www-form-urlencoded",
           Token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2h2cTBCdE1penctX0EycXkwVnI1WFkyRnhvIiwiYXVkaWVuY2UiOiJtb2JpbGUiLCJjcmVhdGVkIjoxNTgyODE3MDU4NTg3LCJhcHBJZCI6Ind4ODU1YzVkNzcxOGYyMThjOSIsImN1cnJlbnRPcGVuSWQiOiJvY2h2cTBCdE1penctX0EycXkwVnI1WFkyRnhvIiwib3JpZ2luT3BlbklkIjoib2NodnEwQnRNaXp3LV9BMnF5MFZyNVhZMkZ4byIsImV4cCI6MTU4MjkwMzQ1OH0.haUP45wjvt9EXRQYWtCT-IdPdQXBHkM9LKEFan2vVJ4"
         },
-        body:"habitID=4025457&notePhotoProperties=&tagIds=&openId=ochvq0BtMizw-_A2qy0Vr5XY2Fxo&topicID=0&curDate=&logID=711246615&noteText=%E6%89%93%E5%8D%A1&notePhoto=&noteLat=&noteLng=&noteLocation=&noteLocationDesc=&noteVisible=1&habitForceNoteState=1&noteAudioKey=&noteAudioType=1&noteAudioTime=0&noteVideoKey=&noteVideoDuration=&noteVideoHeight=&noteVideoWidth=&noteVideoSize=&qrCode=&fromOpenId=&inviteType=&sessionId=1582817077972"
+        body:"habitID=4025457&notePhotoProperties=&tagIds=&openId=ochvq0BtMizw-_A2qy0Vr5XY2Fxo&topicID=0&curDate=&logID=711246615&noteText=%E6%89%93%E5%8D%A1&notePhoto=&noteLat=&noteLng=&noteLocation=&noteLocationDesc=&noteVisible=1&habitForceNoteState=1&noteAudioKey=&noteAudioType=1&noteAudioTime=0&noteVideoKey=&noteVideoDuration=&noteVideoHeight=&noteVideoWidth=&noteVideoSize=&qrCode=&fromOpenId=&inviteType=&sessionId=1582862679900"
 }, function(error, response, data){
     if (error){
         console.log(error);
