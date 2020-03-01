@@ -65,7 +65,7 @@ var stop = 0; //自定义延迟签到,单位毫秒,(如填200则每个接口延�
 var $nobyda = nobyda();
 
 //  填此处↓↓↓
-var Key = 'pt_key=app_openAAJeVwoXADC-p_GDwASk3fuwj82_oC13nb0WTfw67WsC6d5AJoAkWFj31-DqZG9KT8X96hj8DEk; pt_pin=jd_GuCszPAdWwRq; pwdt_id=jd_GuCszPAdWwRq; sid=6f87b3f6b3faab93a67ca18196d1cd5w; qd_ad=-%7C-%7Cdirect%7C-%7C0; qd_uid=K73ZY1AV-4VGAUE6N11FQQSCVN562; qd_fs=1582762531342; qd_ls=1582762531342; qd_ts=1582762531342; qd_sq=1; qd_sid=K73ZY1AV-4VGAUE6N11FQQSCVN562-1; mobilev=touch; __jda=122270672.15827625539341502065818.1582762553.1582762553.1582762553.1; __jdb=122270672.1.15827625539341502065818|1.1582762553; __jdv=122270672%7Cdirect%7C-%7Cnone%7C-%7C1582762553943; __jdc=122270672; mba_muid=15827625539341502065818; mba_sid=15827625539775205436614615344.1; __jd_ref_cls=JDReact_StartReactModule; wxa_level=1'; //如果使用JSBox或Node.js, 此处自行抓包填写您的Cookie.
+var Key = 'pt_pin=jd_GuCszPAdWwRq; pwdt_id=jd_GuCszPAdWwRq; qd_uid=K73ZY1AV-4VGAUE6N11FQQSCVN562; qd_fs=1582762531342; qd_ls=1582762531342; mobilev=touch; __jda=122270672.15827625539341502065818.1582762553.1582762553.1582762553.1; __jdv=122270672%7Cdirect%7C-%7Cnone%7C-%7C1582762553943; __jdc=122270672; mba_muid=15827625539341502065818; __jd_ref_cls=MJingDouHome_Watering; pt_key=app_openAAJeWcVoADCXwRRXZ3_woypEQ-iHCU9OGZD1PKmicCMUkUuYWc0eQTFGD2bgMJkWVplwYN7_43U; sid=2ccc43f913934a1b592775b1a22413fw; qd_ad=-%7C-%7Cdirect%7C-%7C0; qd_ts=1582941555841; qd_sq=2; qd_sid=K73ZY1AV-4VGAUE6N11FQQSCVN562-2'; //如果使用JSBox或Node.js, 此处自行抓包填写您的Cookie.
 //  填此处↑↑↑
 
 var KEY = Key?Key:$nobyda.read("CookieJD")
